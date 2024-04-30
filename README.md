@@ -12,7 +12,10 @@ npm install express-route-lister
 ### Code
 
 ```js
+const express = require('express');
 const expressRouteLister = require('express-route-lister');
+
+const app = express();
 ```
 
 ## Log Routes on Init.
