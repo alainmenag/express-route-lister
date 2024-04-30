@@ -125,6 +125,13 @@ api.log = (app = null, options = {}) =>
 		console.log(symbol, ts, methods, paths, `(${ route.file || '' })`);
 	};
 
+	if (options && options.http) app.get(options.http, (req, res, next) =>
+	{
+		const list = api.list(app);
+
+		res.send(list);
+	});
+
 	// if live logging as middleware
 	if (options && options.live) return function(req, res, next)
 	{

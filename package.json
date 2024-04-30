@@ -1,5 +1,5 @@
 {
-  "name": "express-route-lister",
+  "name": "express-route-listings",
   "version": "1.0.0",
   "description": "List all your express routes.",
   "main": "index.js",

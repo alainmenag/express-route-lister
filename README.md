@@ -61,16 +61,34 @@ app.listen(3001, '127.0.0.1', (e) =>
 ### Code
 
 ```js
-app.use(expressRouteListings.log(app, { live: true }));
+app.use(expressRouteListings.log(app, { live: true, http: '/routes' }));
 ```
 
-### Output
+### live: true
+Will log each request and it's matching route details.
 
 ```log
 ✅ 2024-04-30T02:49:48.687Z [ 'GET', 'GET' ] [ '/api/obs', '/api/obs' ] (/routes/api/obs.js)
 ❌ 2024-04-30T02:50:11.581Z [ 'GET', null ] [ '/api/obsd', null ] ()
 ✅ 2024-04-30T02:50:24.593Z [ 'GET', 'GET' ] [ '/api/litra/23424234234', '/api/litra/:id' ] (/routes/api/litra.js)
 ✅ 2024-04-30T02:55:00.653Z [ 'GET', 'GET' ] [ '/', '/' ] (/routes/index.js)
+```
+
+### http: true
+The routes array will be sent out via http to the specified path.
+
+```json
+[
+	{
+		name: 'query',
+		regexp: '/',
+		path: '/',
+		methods: [ '*' ],
+		code: 'function query(req, res, next){\n...'
+		file: '/routes/index.js'
+	},
+	...
+]
 ```
 
 ## Array of Routes
