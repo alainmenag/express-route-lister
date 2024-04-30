@@ -21,7 +21,7 @@ const app = express();
 ```js
 app.listen(3001, '127.0.0.1', (e) =>
 {
-	expressRouteListings.log(app); // log all routes on app. start
+	expressRouteListings.log(app, {}); // log all routes on app. start
 });
 ```
 
@@ -52,13 +52,11 @@ app.listen(3001, '127.0.0.1', (e) =>
 ```
 
 ## Middleware Live Logger
+Will log each request and it's matching route details.
 
 ```js
-app.use(expressRouteListings.log(app, { live: true, http: '/routes' }));
+app.use(expressRouteListings.log({}));
 ```
-
-### live: true
-Will log each request and it's matching route details.
 
 ```log
 ✅ 2024-04-30T02:49:48.687Z [ 'GET', 'GET' ] [ '/api/obs', '/api/obs' ] (/routes/api/obs.js)
@@ -67,8 +65,14 @@ Will log each request and it's matching route details.
 ✅ 2024-04-30T02:55:00.653Z [ 'GET', 'GET' ] [ '/', '/' ] (/routes/index.js)
 ```
 
-### http: true
-The routes array will be sent out via http to the specified path.
+## Middleware HTTP
+Enable the built-in http service.
+
+- Return your routes as an array over HTTP.
+
+```js
+app.get('/what/ever/route', expressRouteListings.http({}));
+```
 
 ```json
 [
@@ -87,7 +91,7 @@ The routes array will be sent out via http to the specified path.
 ## Array of Routes
 
 ```js
-const routes = expressRouteListings.list(app); // log all routes
+const routes = expressRouteListings.list(app, {}); // log all routes
 
 console.log(routes);
 ```

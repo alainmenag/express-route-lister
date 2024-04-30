@@ -47,7 +47,7 @@ api.locate = (layer) =>
 	return null;
 };
 
-api.list = (app) =>
+api.list = (app, options) =>
 {
 	const list = [];
 	const stack = app ? app.stack || app?._router?.stack : null;
@@ -108,8 +108,16 @@ api.list = (app) =>
 	return list;
 };
 
-api.log = (app = null, options = {}) =>
+api.help = () =>
 {
+	console.log('🚥', '<reqTimestamp>', [ '<reqMethod>', '<routeMethod>' ], [ '<reqPath>', '<routePath>' ], '(<routeFile>)');
+};
+
+api.log = function(app, options)
+{
+	options = (app && !app.engine ? app : options) || {};
+	app = app && app.engine ? app : null;
+
 	const log = (route, req) =>
 	{
 		let ts = new Date();
@@ -125,17 +133,18 @@ api.log = (app = null, options = {}) =>
 		console.log(symbol, ts, methods, paths, `(${ route.file || '' })`);
 	};
 
-	if (options && options.http) app.get(options.http, (req, res, next) =>
+	if (app)
 	{
+		api.help();
+
 		const list = api.list(app);
+	
+		for (let route of list) log(route, null);
+	}
 
-		res.send(list);
-	});
-
-	// if live logging as middleware
-	if (options && options.live) return function(req, res, next)
+	return function(req, res, next)
 	{
-		const list = api.list(app);
+		const list = api.list(req.app);
 		
 		const match = list.filter((p) =>
 		{
@@ -147,15 +156,20 @@ api.log = (app = null, options = {}) =>
 		
 		next();
 	};
-
-	console.log('🚥', '<reqTimestamp>', [ '<reqMethod>', '<routeMethod>' ], [ '<reqPath>', '<routePath>' ], '(<routeFile>)');
-
-	const list = api.list(app);
-
-	for (let route of list) log(route, null);
 }
+
+api.http = function(options = {})
+{
+	return function(req, res, next)
+	{
+		const list = api.list(req.app);
+
+		res.send(list);
+	};
+};
 
 module.exports = {
 	list: api.list,
 	log: api.log,
+	http: api.http,
 };
