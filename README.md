@@ -17,9 +17,17 @@ const app = express();
 ```
 
 ## Example
-- [1. Log All Routes](#1-log-all-routes)
-- [2. Middleware Live Logger](#2-middleware-live-logger)
-- [Web Output](#2-web-output)
+- [Express Route Listings](#express-route-listings)
+	- [Install \& Import](#install--import)
+	- [Example](#example)
+	- [1. Log All Routes](#1-log-all-routes)
+	- [2. Middleware Live Logger](#2-middleware-live-logger)
+	- [3. Middleware Web Service](#3-middleware-web-service)
+	- [4. Array of Routes](#4-array-of-routes)
+- [Dictionary](#dictionary)
+	- [Symbols](#symbols)
+	- [Log Syntax](#log-syntax)
+	- [Terms](#terms)
 
 ## 1. Log All Routes
 
@@ -77,7 +85,7 @@ app.use(expressRouteListings.log({
 ✅ 2024-04-30T02:55:00.653Z [ 'GET', 'GET' ] [ '/', '/' ] (/routes/index.js)
 ```
 
-## Middleware Web
+## 3. Middleware Web Service
 Enable the built-in web service.
 
 - Return your routes as an array over HTTP.
@@ -103,7 +111,7 @@ app.get('/what/ever/route', expressRouteListings.web({
 ]
 ```
 
-## Array of Routes
+## 4. Array of Routes
 
 ```js
 const routes = expressRouteListings.list(app, {
