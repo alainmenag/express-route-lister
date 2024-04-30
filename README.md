@@ -21,7 +21,7 @@ app.listen(3001, '127.0.0.1', (e) =>
 	expressRouteLister.log(app); // log all routes on app. start
 });
 ```
-### Outputs
+### Log Routes on Init. - Output
 
 ```log
 🚥 2024-04-30T02:49:45.136Z [ null, '*' ] [ null, '/' ] (/routes/index.js)
@@ -49,13 +49,13 @@ app.listen(3001, '127.0.0.1', (e) =>
 🚥 2024-04-30T02:49:45.138Z [ null, 'GET' ] [ null, '/api/screenshot/cleanup' ] (/routes/api/screenshot.js)
 ```
 
-## As Middleware Live Logger
+## Middleware Live Logger
 
 ```js
 app.use(expressRouteLister.log(app, { live: true }));
 ```
 
-### Outputs
+### Middleware Live Logger - Output
 
 ```log
 ✅ 2024-04-30T02:49:48.687Z [ 'GET', 'GET' ] [ '/api/obs', '/api/obs' ] (/routes/api/obs.js)
@@ -72,7 +72,7 @@ const routes = expressRouteLister.list(app); // log all routes
 console.log(routes);
 ```
 
-### Outputs
+### Array of Objects - Output
 
 ```log
 [
