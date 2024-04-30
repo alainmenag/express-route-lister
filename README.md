@@ -3,13 +3,11 @@
 
 List, log, or render all your express routes and their related file.
 
-## Install
+## Install & Import
 
 ```bash
 npm install express-route-listings
 ```
-
-## Import
 
 ```js
 const express = require('express');
@@ -18,7 +16,12 @@ const expressRouteListings = require('express-route-listings');
 const app = express();
 ```
 
-## Log Routes on Init.
+## Example
+- [1. Log All Routes](#1-log-all-routes)
+- [2. Middleware Live Logger](#2-middleware-live-logger)
+- [Web Output](#2-web-output)
+
+## 1. Log All Routes
 
 ```js
 app.listen(3001, '127.0.0.1', (e) =>
@@ -57,7 +60,7 @@ app.listen(3001, '127.0.0.1', (e) =>
 🚥 2024-04-30T02:49:45.138Z [ null, 'GET' ] [ null, '/api/screenshot/cleanup' ] (/routes/api/screenshot.js)
 ```
 
-## Middleware Live Logger
+## 2. Middleware Live Logger
 Will log each request and it's matching route details.
 
 ```js
