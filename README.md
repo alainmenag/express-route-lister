@@ -121,6 +121,12 @@ console.log(routes);
 
 ## Symbols
 
-- 🚥 - Existing Route
+- 🚥 - Log existing route
 - ✅ - Live log on HTTP request successfully matched to a route
 - ❌ - Live log on HTTP request failed to match to a route
+
+## Log
+
+```log
+✅ <timestamp> [ '<incomingMethod>', '<matchedMethod>' ] [ '<incomingPath>', '<matchingPath>' ] (<routeFile>)
+```
