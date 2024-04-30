@@ -9,7 +9,13 @@ const _cache = require('module')._cache;
 // MODULE - API
 // ==========================================================================
 
-const api = {};
+const api = {
+	symbols: {
+		'route': '🚥',
+		'matched': '✅',
+		'unmatched': '❌',
+	}
+};
 
 // ==========================================================================
 // MODULE - API - PARSE REGEX
@@ -86,7 +92,7 @@ api.list = (app, options = {}) =>
 			if (layer.keys) for (key of layer.keys) route = route.replace(':param', ':' + key.name);
 
 			let item = {
-				symbol: '🚥',
+				symbol: api.symbols.route,
 				name: layer.name,
 				regexp: regexp.slice(0, -1) || '/',
 				route: (route.slice(0, -1) || '/').replace(/\(\.\*\)/g, '*'),
@@ -128,7 +134,7 @@ api.list = (app, options = {}) =>
 
 api.help = () =>
 {
-	console.log('🚥', '<reqTimestamp>', [ '<reqMethod>', '<routeMethod>' ], [ '<reqPath>', '<routePath>' ], '(<routeFile>)');
+	console.log(api.symbols.route, '<reqTimestamp>', [ '<reqMethod>', '<routeMethod>' ], [ '<reqPath>', '<routePath>' ], '(<routeFile>)');
 };
 
 // ==========================================================================
@@ -145,24 +151,32 @@ api.log = function(app, options)
 		route.ts = new Date();
 		route.method = req ? req.method : null;
 
-		if (req && route.route) route.symbol = '✅';
-		if (req && !route.route) route.symbol = '❌';
+		if (req && route.route) route.symbol = api.symbols.matched;
+		if (req && !route.route) route.symbol = api.symbols.unmatched;
 
 		if (options.output == 'json') return console.log(route);
 
 		let methods = [ route.method ].concat(route.methods ? (route.methods || null) : null);
 
-		let paths = [ req ? req.path : null ];
-			paths = paths.concat(route.route ? [ (route.route || null) ] : null);
+		let paths = [ req ? `${ options.pathPrefix || '' }${ req.path }` : null ];
+			paths = paths.concat(route.route ? [ `${ options.routePrefix || '' }${ route.route }` ] : null);
 
-		console.log(route.symbol, route.ts, methods, paths, `(${ route.file || '' })`);
+		console.log(route.symbol || api.symbols.route, route.ts, methods, paths, `(${ route.file || '' })`);
 	};
 
 	if (app)
 	{
+		const list = api.list(app);
+
 		api.help();
 
-		const list = api.list(app);
+		if (!list || !list.length) return;
+
+		if (options.url) log({
+			methods: ['*'],
+			file: list[0].file,
+			route: options.url,
+		})
 	
 		for (let route of list) log(route, null);
 	}
@@ -175,6 +189,12 @@ api.log = function(app, options)
 		{
 			return p.regexp ? (new RegExp('^' + p.regexp + '$')).test(req.path) : null;
 		}).pop();
+
+		if (options.url) log({
+			methods: ['*'],
+			file: list[0].file,
+			route: options.url,
+		})
 
 		log(match || {}, req);
 		

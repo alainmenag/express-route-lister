@@ -34,6 +34,7 @@ app.listen(3001, '127.0.0.1', (e) =>
 {
 	// log all mounted routes
 	expressRouteListings.log(app, {
+		//url: 'http://localhost:8715', // (optional) to include in logging
 		//output: 'json', // (optional) log route as json
 		//output: null, // (default) log route as formatted text
 	});
@@ -71,8 +72,11 @@ Will log each request and it's matching route details.
 
 ```js
 app.use(expressRouteListings.log({
+	//url: 'http://localhost:8715', // (optional) to include in logging
 	//output: 'json', // (optional) log route as json
 	//output: null, // (default) log route as formatted text
+	//pathPrefix: 'https://website.com', // (optional) prepend url/chars to an incoming path
+	//routePrefix: 'http://localhost:8715', // (optional) prepend url/chars to an incoming path
 }));
 ```
 
