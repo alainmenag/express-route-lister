@@ -3,25 +3,26 @@
 
 ## Install
 
-```
+```bash
 npm install express-route-lister
 ```
 
 ## Import
 
-```
+```js
 const expressRouteLister = require('express-route-lister');
 ```
 
 ## Log Routes on Init.
 
-```
+```js
 app.listen(3001, '127.0.0.1', (e) =>
 {
 	expressRouteLister.log(app); // log all routes on app. start
 });
 ```
 
+```log
 🚥 2024-04-30T02:49:45.136Z [ null, '*' ] [ null, '/' ] (/routes/index.js)
 🚥 2024-04-30T02:49:45.137Z [ null, '*' ] [ null, '/' ] (/routes/index.js)
 🚥 2024-04-30T02:49:45.137Z [ null, '*' ] [ null, '/' ] (/routes/index.js)
@@ -45,26 +46,30 @@ app.listen(3001, '127.0.0.1', (e) =>
 🚥 2024-04-30T02:49:45.138Z [ null, 'POST' ] [ null, '/api/litra/dial/:id' ] (/routes/api/litra.js)
 🚥 2024-04-30T02:49:45.138Z [ null, 'POST' ] [ null, '/api/litra/toggle/:id' ] (/routes/api/litra.js)
 🚥 2024-04-30T02:49:45.138Z [ null, 'GET' ] [ null, '/api/screenshot/cleanup' ] (/routes/api/screenshot.js)
+```
 
 ## As Middleware Live Logger
 
-```
+```js
 app.use(expressRouteLister.log(app, { live: true }));
 ```
 
+```log
 ✅ 2024-04-30T02:49:48.687Z [ 'GET', 'GET' ] [ '/api/obs', '/api/obs' ] (/routes/api/obs.js)
 ❌ 2024-04-30T02:50:11.581Z [ 'GET', null ] [ '/api/obsd', null ] ()
 ✅ 2024-04-30T02:50:24.593Z [ 'GET', 'GET' ] [ '/api/litra/23424234234', '/api/litra/:id' ] (/routes/api/litra.js)
 ✅ 2024-04-30T02:55:00.653Z [ 'GET', 'GET' ] [ '/', '/' ] (/routes/index.js)
+```
 
 ## Array of Objects
 
-```
+```js
 const routes = expressRouteLister.list(app); // log all routes
 
 console.log(routes);
 ```
 
+```log
 [
   {
     name: 'query',
@@ -95,3 +100,4 @@ console.log(routes);
     file: '/routes/api/obs.js'
   }
 ]
+```
