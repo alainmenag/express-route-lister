@@ -7,6 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Sebastian Alain Mena Galindo",
+  "license": "ISC",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alainmenag/express-route-listings.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alainmenag/express-route-listings/issues"
+  },
+  "homepage": "https://github.com/alainmenag/express-route-listings#readme"
 }
