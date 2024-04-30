@@ -4,7 +4,7 @@
 ## Install
 
 ```bash
-npm install express-route-lister
+npm install express-route-listings
 ```
 
 ## Import
@@ -13,7 +13,7 @@ npm install express-route-lister
 
 ```js
 const express = require('express');
-const expressRouteLister = require('express-route-lister');
+const expressRouteListings = require('express-route-listings');
 
 const app = express();
 ```
@@ -25,7 +25,7 @@ const app = express();
 ```js
 app.listen(3001, '127.0.0.1', (e) =>
 {
-	expressRouteLister.log(app); // log all routes on app. start
+	expressRouteListings.log(app); // log all routes on app. start
 });
 ```
 ### Output
@@ -61,7 +61,7 @@ app.listen(3001, '127.0.0.1', (e) =>
 ### Code
 
 ```js
-app.use(expressRouteLister.log(app, { live: true }));
+app.use(expressRouteListings.log(app, { live: true }));
 ```
 
 ### Output
@@ -78,7 +78,7 @@ app.use(expressRouteLister.log(app, { live: true }));
 ### Code
 
 ```js
-const routes = expressRouteLister.list(app); // log all routes
+const routes = expressRouteListings.list(app); // log all routes
 
 console.log(routes);
 ```
