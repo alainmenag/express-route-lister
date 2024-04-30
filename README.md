@@ -129,6 +129,5 @@ console.log(routes);
 
 ```
 ✅ 2024-04-30T02:50:24.593Z [ 'GET', 'GET' ] [ '/api/litra/23424234234', '/api/litra/:id' ] (/routes/api/litra.js)
-
 ✅ <timestamp> [ '<incomingMethod>', '<matchedMethod>' ] [ '<incomingPath>', '<matchingPath>' ] (<routeFile>)
 ```
