@@ -8,3 +8,4 @@ package-lock.json
 .env
 __exclude
 notes.txt
+express-route-listings.code-workspace
