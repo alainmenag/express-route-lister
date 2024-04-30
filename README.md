@@ -61,7 +61,10 @@ app.listen(3001, '127.0.0.1', (e) =>
 Will log each request and it's matching route details.
 
 ```js
-app.use(expressRouteListings.log({}));
+app.use(expressRouteListings.log({
+	//output: 'json', // (optional) log route as json
+	//output: null, // (default) log route as formatted text
+}));
 ```
 
 ```log
