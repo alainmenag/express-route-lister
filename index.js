@@ -141,6 +141,8 @@ api.log = (app = null, options = {}) =>
 		next();
 	};
 
+	console.log('🚥', '<timestamp>', [ '<incomingMethod>', '<matchedMethod>' ], [ '<incomingPath>', '<matchingPath>' ], '(<routeFile>)');
+
 	const list = api.list(app);
 
 	for (let route of list) log(route, null);
