@@ -116,3 +116,11 @@ console.log(routes);
 	}
 ]
 ```
+
+# Dictionary
+
+## Symbols
+
+- 🚥 - Existing Route
+- ✅ - Live log on HTTP request successfully matched to a route
+- ❌ - Live log on HTTP request failed to match to a route
