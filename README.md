@@ -9,8 +9,6 @@ npm install express-route-listings
 
 ## Import
 
-### Code
-
 ```js
 const express = require('express');
 const expressRouteListings = require('express-route-listings');
@@ -20,15 +18,12 @@ const app = express();
 
 ## Log Routes on Init.
 
-### Code
-
 ```js
 app.listen(3001, '127.0.0.1', (e) =>
 {
 	expressRouteListings.log(app); // log all routes on app. start
 });
 ```
-### Output
 
 ```log
 🚥 2024-04-30T02:49:45.136Z [ null, '*' ] [ null, '/' ] (/routes/index.js)
@@ -57,8 +52,6 @@ app.listen(3001, '127.0.0.1', (e) =>
 ```
 
 ## Middleware Live Logger
-
-### Code
 
 ```js
 app.use(expressRouteListings.log(app, { live: true, http: '/routes' }));
@@ -93,15 +86,11 @@ The routes array will be sent out via http to the specified path.
 
 ## Array of Routes
 
-### Code
-
 ```js
 const routes = expressRouteListings.list(app); // log all routes
 
 console.log(routes);
 ```
-
-### Output
 
 ```log
 [
