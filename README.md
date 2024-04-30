@@ -9,11 +9,15 @@ npm install express-route-lister
 
 ## Import
 
+### Code
+
 ```js
 const expressRouteLister = require('express-route-lister');
 ```
 
 ## Log Routes on Init.
+
+### Code
 
 ```js
 app.listen(3001, '127.0.0.1', (e) =>
@@ -21,7 +25,7 @@ app.listen(3001, '127.0.0.1', (e) =>
 	expressRouteLister.log(app); // log all routes on app. start
 });
 ```
-### Log Routes on Init. - Output
+### Output
 
 ```log
 🚥 2024-04-30T02:49:45.136Z [ null, '*' ] [ null, '/' ] (/routes/index.js)
@@ -51,11 +55,13 @@ app.listen(3001, '127.0.0.1', (e) =>
 
 ## Middleware Live Logger
 
+### Code
+
 ```js
 app.use(expressRouteLister.log(app, { live: true }));
 ```
 
-### Middleware Live Logger - Output
+### Output
 
 ```log
 ✅ 2024-04-30T02:49:48.687Z [ 'GET', 'GET' ] [ '/api/obs', '/api/obs' ] (/routes/api/obs.js)
@@ -66,13 +72,15 @@ app.use(expressRouteLister.log(app, { live: true }));
 
 ## Array of Objects
 
+### Code
+
 ```js
 const routes = expressRouteLister.list(app); // log all routes
 
 console.log(routes);
 ```
 
-### Array of Objects - Output
+### Output
 
 ```log
 [
