@@ -47,7 +47,7 @@ api.locate = (layer) =>
 	return null;
 };
 
-api.list = (app, options) =>
+api.list = (app, options = {}) =>
 {
 	const list = [];
 	const stack = app ? app.stack || app?._router?.stack : null;
@@ -68,34 +68,31 @@ api.list = (app, options) =>
 			// fill params with names
 			if (layer.keys) for (key of layer.keys) route = route.replace(':param', ':' + key.name);
 
-			// if it's middleware
-			if (!layer?.handle?.stack && !layer.route)
-			{
-				list.push({
-					name: layer.name,
-					regexp: regexp.slice(0, -1) || '/',
-					path: (route.slice(0, -1) || '/').replace(/\(\.\*\)/g, '*'),
-					methods: ['*'],
-					code: layer?.handle.toString(),
-					file: api.locate(layer),
-				});
-			}
+			let item = {
+				symbol: '🚥',
+				name: layer.name,
+				regexp: regexp.slice(0, -1) || '/',
+				route: (route.slice(0, -1) || '/').replace(/\(\.\*\)/g, '*'),
+				file: api.locate(layer),
+				methods: api.formatMethods(layer?.route?.methods || {'*': true}), // * is for all methods
+				code: layer?.route?.stack[0]?.handle.toString() || layer?.handle.toString(),
+			};
 
-			// if defined route
-			else if (layer.route)
+			let out = options?.include?.length || options?.exclude?.length ? {} : item;
+			
+			// include or exclude certain key-value pairs
+			for (const key in item) if (options?.include?.length && options.include.includes(key))
 			{
-				list.push({
-					name: layer.name,
-					regexp: regexp.slice(0, -1) || '/',
-					path: (route.slice(0, -1) || '/').replace(/\(\.\*\)/g, '*'),
-					methods: api.formatMethods(layer.route.methods),
-					code: layer.route?.stack[0]?.handle.toString(),
-					file: api.locate(layer),
-				});
+				out[key] = item[key];
+			} else if (options?.exclude?.length && !options.exclude.includes(key))
+			{
+				out[key] = item[key];
 			}
+			
+			list.push(out);
 
 			// keep diving through child routes
-			else if (layer?.handle?.stack)
+			if (layer?.handle?.stack)
 			{
 				for (l of layer.handle.stack) getRoute(l, null, route);
 			}
@@ -120,17 +117,20 @@ api.log = function(app, options)
 
 	const log = (route, req) =>
 	{
-		let ts = new Date();
-		let methods = [ req ? req.method : null ];
-			methods = methods.concat(route.methods ? (route.methods || null) : null);
+		route.ts = new Date();
+		route.method = req ? req.method : null;
+
+		if (req && route.route) route.symbol = '✅';
+		if (req && !route.route) route.symbol = '❌';
+
+		if (options.output == 'json') return console.log(route);
+
+		let methods = [ route.method ].concat(route.methods ? (route.methods || null) : null);
+
 		let paths = [ req ? req.path : null ];
-			paths = paths.concat(route.path ? [ (route.path || null) ] : null);
-		let symbol = '🚥';
+			paths = paths.concat(route.route ? [ (route.route || null) ] : null);
 
-		if (req && route.path) symbol = '✅';
-		if (req && !route.path) symbol = '❌';
-
-		console.log(symbol, ts, methods, paths, `(${ route.file || '' })`);
+		console.log(route.symbol, route.ts, methods, paths, `(${ route.file || '' })`);
 	};
 
 	if (app)
@@ -148,7 +148,6 @@ api.log = function(app, options)
 		
 		const match = list.filter((p) =>
 		{
-			//return p.regexp ? (new RegExp(p.regexp)).test(req._parsedUrl.path) : null;
 			return p.regexp ? (new RegExp('^' + p.regexp + '$')).test(req.path) : null;
 		}).pop();
 
@@ -162,7 +161,7 @@ api.http = function(options = {})
 {
 	return function(req, res, next)
 	{
-		const list = api.list(req.app);
+		const list = api.list(req.app, options);
 
 		res.send(list);
 	};

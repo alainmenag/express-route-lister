@@ -23,7 +23,11 @@ const app = express();
 ```js
 app.listen(3001, '127.0.0.1', (e) =>
 {
-	expressRouteListings.log(app, {}); // log all routes on app. start
+	// log all mounted routes
+	expressRouteListings.log(app, {
+		//output: 'json', // (optional) log route as json
+		//output: null, // (default) log route as formatted text
+	});
 });
 ```
 
@@ -73,7 +77,10 @@ Enable the built-in http service.
 - Return your routes as an array over HTTP.
 
 ```js
-app.get('/what/ever/route', expressRouteListings.http({}));
+app.get('/what/ever/route', expressRouteListings.http({
+	//include: [ 'name', 'regexp', 'route', 'file', 'methods', 'code' ], // (default) include only certain key-value pairs
+	//exclude: [ 'code' ], // (optional) do not include certain key-value pairs
+}));
 ```
 
 ```json
@@ -81,7 +88,7 @@ app.get('/what/ever/route', expressRouteListings.http({}));
 	{
 		"name": "query",
 		"regexp": "/",
-		"path": "/",
+		"route": "/",
 		"methods": [ "*" ],
 		"code": "function query(req, res, next){\n...",
 		"file": "/routes/index.js"
@@ -93,7 +100,10 @@ app.get('/what/ever/route', expressRouteListings.http({}));
 ## Array of Routes
 
 ```js
-const routes = expressRouteListings.list(app, {}); // log all routes
+const routes = expressRouteListings.list(app, {
+	exclude: [ 'code' ], // (optional) do not include certain key-value pairs
+	include: [ 'name', 'regexp', 'route', 'file', 'methods', 'code' ], // (optional) include only certain key-value pairs
+});
 
 console.log(routes);
 ```
@@ -103,7 +113,7 @@ console.log(routes);
 	{
 		name: 'query',
 		regexp: '/',
-		path: '/',
+		route: '/',
 		methods: [ '*' ],
 		code: 'function query(req, res, next){\n...'
 		file: '/routes/index.js'
@@ -111,7 +121,7 @@ console.log(routes);
 	{
 		name: 'expressInit',
 		regexp: '/',
-		path: '/',
+		route: '/',
 		methods: [ '*' ],
 		code: 'function expressInit...',
 		file: '/routes/index.js'
@@ -122,7 +132,7 @@ console.log(routes);
 	{
 		name: 'bound dispatch',
 		regexp: '/api/obs/resource',
-		path: '/api/obs/resource',
+		route: '/api/obs/resource',
 		methods: [ 'POST' ],
 		code: 'async function(req, res)...',
 		file: '/routes/api/obs.js'
@@ -141,6 +151,6 @@ console.log(routes);
 ## Log
 
 ```
-🚥 <reqTimestamp> [ '<reqMethod>', '<routeMethod>' ] [ '<reqPath>', '<routePath>' ] (<routeFile>)
+🚥 <reqTimestamp> [ '<reqMethod>', '<routeMethod>' ] [ '<reqPath>', '<routeRoute>' ] (<routeFile>)
 ✅ 2024-04-30T02:50:24.593Z [ 'GET', 'GET' ] [ '/api/litra/23424234234', '/api/litra/:id' ] (/routes/api/litra.js)
 ```

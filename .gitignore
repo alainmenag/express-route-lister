@@ -7,3 +7,4 @@ package-lock.json
 .git
 .env
 __exclude
+notes.txt
