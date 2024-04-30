@@ -157,7 +157,7 @@ api.log = function(app, options)
 	};
 }
 
-api.http = function(options = {})
+api.web = function(options = {})
 {
 	return function(req, res, next)
 	{
@@ -170,5 +170,5 @@ api.http = function(options = {})
 module.exports = {
 	list: api.list,
 	log: api.log,
-	http: api.http,
+	web: api.web,
 };

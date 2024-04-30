@@ -74,13 +74,13 @@ app.use(expressRouteListings.log({
 ✅ 2024-04-30T02:55:00.653Z [ 'GET', 'GET' ] [ '/', '/' ] (/routes/index.js)
 ```
 
-## Middleware HTTP
-Enable the built-in http service.
+## Middleware Web
+Enable the built-in web service.
 
 - Return your routes as an array over HTTP.
 
 ```js
-app.get('/what/ever/route', expressRouteListings.http({
+app.get('/what/ever/route', expressRouteListings.web({
 	//include: [ 'name', 'regexp', 'route', 'file', 'methods', 'code' ], // (default) include only certain key-value pairs
 	//exclude: [ 'code' ], // (optional) do not include certain key-value pairs
 }));
