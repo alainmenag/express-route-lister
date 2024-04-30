@@ -73,7 +73,7 @@ app.use(expressRouteLister.log(app, { live: true }));
 ✅ 2024-04-30T02:55:00.653Z [ 'GET', 'GET' ] [ '/', '/' ] (/routes/index.js)
 ```
 
-## Array of Objects
+## Array of Routes
 
 ### Code
 
