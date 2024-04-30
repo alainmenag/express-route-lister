@@ -73,12 +73,12 @@ The routes array will be sent out via http to the specified path.
 ```json
 [
 	{
-		name: 'query',
-		regexp: '/',
-		path: '/',
-		methods: [ '*' ],
-		code: 'function query(req, res, next){\n...'
-		file: '/routes/index.js'
+		"name": "query",
+		"regexp": "/",
+		"path": "/",
+		"methods": [ "*" ],
+		"code": "function query(req, res, next){\n...",
+		"file": "/routes/index.js"
 	},
 	...
 ]
