@@ -4,8 +4,8 @@ List, log, or render all your express routes and their related file.
 - [Install \& Import](#install--import)
 - [Usage](#usage)
 	- [1. Log All Routes](#1-log-all-routes)
-	- [2. Middleware Live Logger](#2-middleware-live-logger)
-	- [3. Middleware Web Service](#3-middleware-web-service)
+	- [2. Live Logger](#2-live-logger)
+	- [3. Web Service](#3-web-service)
 	- [4. Array of Routes](#4-array-of-routes)
 - [Dictionary](#dictionary)
 	- [Symbols](#symbols)
@@ -66,7 +66,7 @@ app.listen(3001, '127.0.0.1', (e) =>
 🚥 2024-04-30T02:49:45.138Z [ null, 'GET' ] [ null, '/api/screenshot/cleanup' ] (/routes/api/screenshot.js)
 ```
 
-## 2. Middleware Live Logger
+## 2. Live Logger
 Will log each request and it's matching route details.
 
 ```js
@@ -83,7 +83,7 @@ app.use(expressRouteListings.log({
 ✅ 2024-04-30T02:55:00.653Z [ 'GET', 'GET' ] [ '/', '/' ] (/routes/index.js)
 ```
 
-## 3. Middleware Web Service
+## 3. Web Service
 Enable the built-in web service.
 
 - Return your routes as an array over HTTP.
