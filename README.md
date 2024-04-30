@@ -92,7 +92,7 @@ const routes = expressRouteListings.list(app); // log all routes
 console.log(routes);
 ```
 
-```log
+```js
 [
 	{
 		name: 'query',
