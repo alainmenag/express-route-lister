@@ -1,6 +1,6 @@
 {
     "name": "express-route-listings",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "List all your express routes.",
     "main": "index.js",
     "scripts": {
