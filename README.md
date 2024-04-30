@@ -71,33 +71,32 @@ console.log(routes);
 
 ```log
 [
-  {
-    name: 'query',
-    regexp: '/',
-    path: '/',
-    methods: [ '*' ],
-    code: 'function query(req, res, next){\n' +
-        '    if (!req.query) {\n'...',
-    file: '/routes/index.js'
-  },
-  {
-    name: 'expressInit',
-    regexp: '/',
-    path: '/',
-    methods: [ '*' ],
-    code: 'function expressInit...',
-    file: '/routes/index.js'
-  },
+	{
+		name: 'query',
+		regexp: '/',
+		path: '/',
+		methods: [ '*' ],
+		code: 'function query(req, res, next){\n...'
+		file: '/routes/index.js'
+	},
+	{
+		name: 'expressInit',
+		regexp: '/',
+		path: '/',
+		methods: [ '*' ],
+		code: 'function expressInit...',
+		file: '/routes/index.js'
+	},
 
-  ...
+	...
 
-  {
-    name: 'bound dispatch',
-    regexp: '/api/obs/resource',
-    path: '/api/obs/resource',
-    methods: [ 'POST' ],
-    code: 'async function(req, res)...',
-    file: '/routes/api/obs.js'
-  }
+	{
+		name: 'bound dispatch',
+		regexp: '/api/obs/resource',
+		path: '/api/obs/resource',
+		methods: [ 'POST' ],
+		code: 'async function(req, res)...',
+		file: '/routes/api/obs.js'
+	}
 ]
 ```
