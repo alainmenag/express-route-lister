@@ -127,4 +127,6 @@ console.log(routes);
 
 ## Log
 
+```
 ✅ <timestamp> [ '<incomingMethod>', '<matchedMethod>' ] [ '<incomingPath>', '<matchingPath>' ] (<routeFile>)
+```
