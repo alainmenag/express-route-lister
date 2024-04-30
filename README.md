@@ -3,6 +3,17 @@
 
 List, log, or render all your express routes and their related file.
 
+- [Express Route Listings](#express-route-listings)
+	- [Install \& Import](#install--import)
+	- [1. Log All Routes](#1-log-all-routes)
+	- [2. Middleware Live Logger](#2-middleware-live-logger)
+	- [3. Middleware Web Service](#3-middleware-web-service)
+	- [4. Array of Routes](#4-array-of-routes)
+- [Dictionary](#dictionary)
+	- [Symbols](#symbols)
+	- [Log Syntax](#log-syntax)
+	- [Terms](#terms)
+
 ## Install & Import
 
 ```bash
@@ -15,19 +26,6 @@ const expressRouteListings = require('express-route-listings');
 
 const app = express();
 ```
-
-## Example
-- [Express Route Listings](#express-route-listings)
-	- [Install \& Import](#install--import)
-	- [Example](#example)
-	- [1. Log All Routes](#1-log-all-routes)
-	- [2. Middleware Live Logger](#2-middleware-live-logger)
-	- [3. Middleware Web Service](#3-middleware-web-service)
-	- [4. Array of Routes](#4-array-of-routes)
-- [Dictionary](#dictionary)
-	- [Symbols](#symbols)
-	- [Log Syntax](#log-syntax)
-	- [Terms](#terms)
 
 ## 1. Log All Routes
 
