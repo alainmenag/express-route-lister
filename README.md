@@ -77,7 +77,7 @@ console.log(routes);
     path: '/',
     methods: [ '*' ],
     code: 'function query(req, res, next){\n' +
-    	'    if (!req.query) {\n'...',
+        '    if (!req.query) {\n'...',
     file: '/routes/index.js'
   },
   {
@@ -86,7 +86,7 @@ console.log(routes);
     path: '/',
     methods: [ '*' ],
     code: 'function expressInit...',
-	file: '/routes/index.js'
+    file: '/routes/index.js'
   },
 
   ...
